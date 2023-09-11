@@ -9,11 +9,11 @@
 
 ## Laravel WebGL, brain-js, TensorFlow, and ChatGPT
 
-This is a sample WebGL, brain-js, TensorFlow, and ChatGPT.
-WebGL (short for Web Graphics Library) is a JavaScript API for rendering interactive 2D and 3D graphics within any compatible web browser without the use of plug-ins. (Wikipedia)
-Brain.js is a JavaScript library used for neural networking, which is released as free and open-source software under the MIT License. (Wikipedia)
-TensorFlow is a free and open-source software library for machine learning and artificial intelligence. It can be used across a range of tasks but has a particular focus on training and inference of deep neural networks. (Wikipedia)
-ChatGPT, which stands for Chat Generative Pre-trained Transformer, is a large language model-based chatbot developed by OpenAI and launched on November 30, 2022, which enables users to refine and steer a conversation towards a desired length, format, style, level of detail, and language used. (Wikipedia)
+This is a sample WebGL, brain-js, TensorFlow, and ChatGPT. <br>
+<b>WebGL</b> (short for Web Graphics Library) is a JavaScript API for rendering interactive 2D and 3D graphics within any compatible web browser without the use of plug-ins. <br>
+<b>Brain.js</b> is a JavaScript library used for neural networking, which is released as free and open-source software under the MIT License. <br>
+<b>TensorFlow</b> is a free and open-source software library for machine learning and artificial intelligence. It can be used across a range of tasks but has a particular focus on training and inference of deep neural networks. <br>
+<b>ChatGPT</b>, which stands for Chat Generative Pre-trained Transformer, is a large language model-based chatbot developed by OpenAI and launched on November 30, 2022, which enables users to refine and steer a conversation towards a desired length, format, style, level of detail, and language used. (Wikipedia)
 
 ## Version
 
