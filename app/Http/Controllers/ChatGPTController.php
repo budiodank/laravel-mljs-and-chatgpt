@@ -14,10 +14,10 @@ class ChatGPTController extends Controller
 
     public function ask(Request $request)
     {
-        $prompt = $request->input('prompt');
-        $response = $this->askToChatGPT($prompt);
+        $message = $request->get('message');
+        $response = $this->askToChatGPT($message);
 
-        return view('chatgpt.response', ['response' => $response]);
+        return response()->json($response);
     }
 
     private function askToChatGPT($message)
