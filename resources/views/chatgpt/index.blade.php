@@ -4,18 +4,6 @@
 @section('content')
 <div class="card">
     <div class="card-header">ChatGPT</div>
-
-    <!-- <div class="card-body">
-        <form method="POST" action="{{ route('chatgpt.ask') }}">
-            @csrf
-
-            <div class="form-group">
-                <input type="text" class="form-control text-center" name="prompt" placeholder="Ask something...">
-            </div>
-
-            <button type="submit" class="btn btn-primary">Send</button>
-        </form>
-    </div> -->
     <div class="card-body">
         <div class="direct-chat-messages" id="message-chatgpt">
 
@@ -27,7 +15,7 @@
             <div class="input-group">
                 <input type="text" id="message" name="message" placeholder="Ask something ..." class="form-control">
                 <span class="input-group-append">
-                    <button type="button" class="btn btn-primary" onclick="askChatGPT(this)">Send
+                    <button type="button" class="btn btn-primary" id="btn-send" onclick="askChatGPT(this)">Send
                         <div class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true">
                             <span class="sr-only">Loading...</span>
                         </div>
@@ -43,7 +31,28 @@
 <script>
     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+    $(document).ready(function() {
+        var messageInput = document.getElementById('message');
+
+        // Add an event listener to capture the Enter key press
+        messageInput.addEventListener('keydown', function(e) {
+            // Check if the pressed key is Enter (key code 13)
+            if (e.keyCode === 13) {
+                // Prevent the default behavior of the Enter key (form submission)
+                e.preventDefault();
+
+                $("#btn-send").click();
+            }
+        });
+    });
+
     function askChatGPT(e) {
+        const d = new Date();
+        let day = d.getDate();
+        let year = d.getFullYear();
+        let nameMonth = month[d.getMonth()];
+        let hour = d.getHours();
+        let minutes = d.getMinutes();
         let message = $('#message').val()
         if (message == "") {
             return Swal.fire({
@@ -56,6 +65,23 @@
         $(e).prop('disabled', true)
         $(e).find('.spinner-border').removeClass('d-none')
 
+        html = '<div class="direct-chat-msg">' +
+            '<div class="direct-chat-infos clearfix">' +
+            '<span class="direct-chat-name float-left">You</span>' +
+            '<span class="direct-chat-timestamp float-right">' + day + ' ' + nameMonth + ' ' + hour + ':' + minutes + '</span>' +
+            '</div>' +
+            '<div class="direct-chat-img text-center mt-1">' +
+            '<i class="fa fa-user"></i>' +
+            '</div>' +
+            '<div class="direct-chat-text">' +
+            message +
+            '</div>' +
+            '</div>'
+
+        $('#message-chatgpt').append(html)
+
+        $('#message').val('')
+
         $.ajax({
             type: 'POST',
             headers: {
@@ -67,25 +93,8 @@
             },
             dataType: 'json',
             success: function(res) {
-                const d = new Date();
-                let day = d.getDate();
-                let year = d.getFullYear();
-                let nameMonth = month[d.getMonth()];
-                let hour = d.getHours();
-                let minutes = d.getMinutes();
-                html = '<div class="direct-chat-msg">' +
-                    '<div class="direct-chat-infos clearfix">' +
-                    '<span class="direct-chat-name float-left">You</span>' +
-                    '<span class="direct-chat-timestamp float-right">' + day + ' ' + nameMonth + ' ' + hour + ':' + minutes + '</span>' +
-                    '</div>' +
-                    '<div class="direct-chat-img text-center mt-1">' +
-                    '<i class="fa fa-user"></i>' +
-                    '</div>' +
-                    '<div class="direct-chat-text">' +
-                    message +
-                    '</div>' +
-                    '</div>'
-                html += '<div class="direct-chat-msg right">' +
+
+                html = '<div class="direct-chat-msg right">' +
                     '<div class="direct-chat-infos clearfix">' +
                     '<span class="direct-chat-name float-right">ChatGPT</span>' +
                     '<span class="direct-chat-timestamp float-left">' + day + ' ' + nameMonth + ' ' + hour + ':' + minutes + '</span>' +
@@ -97,9 +106,8 @@
                     res +
                     '</div>' +
                     '</div>'
-                $('#message-chatgpt').append(html)
 
-                $('#message').val('')
+                $('#message-chatgpt').append(html);
                 stopLoading(e)
             },
             error: function(xhr, status, error) {
