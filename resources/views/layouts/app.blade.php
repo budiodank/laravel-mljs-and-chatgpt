@@ -27,11 +27,11 @@
                     <div class="row">
                         <div class="col-5 col-sm-3">
                             <div class="nav flex-column nav-tabs h-100" role="tablist" aria-orientation="vertical">
-                                <a class="nav-link @yield('nav-home')" href="{{ url('welcome') }}">Home</a>
+                                <a class="nav-link @yield('nav-home')" href="{{ url('home') }}">Home</a>
                                 <a class="nav-link @yield('nav-webgl')" href="{{ url('web-gl') }}">WebGL</a>
                                 <a class="nav-link @yield('nav-brain-js')" href="{{ url('brain-js') }}">brain-js</a>
                                 <a class="nav-link @yield('nav-tensorflow')" href="{{ url('tensor-flow') }}">TensorFlow</a>
-                                <a class="nav-link @yield('nav-chatgpt')" href="{{ url('chat-gpt') }}">ChatGPT</a>
+                                <a class="nav-link @yield('nav-chatgpt')" href="{{ url('chatgpt') }}">ChatGPT</a>
                             </div>
                         </div>
                         <div class="col-7 col-sm-9">
